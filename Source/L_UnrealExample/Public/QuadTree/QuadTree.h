@@ -3,36 +3,37 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "./Cluster.h"
+#include "GameFramework/Actor.h"
+#include "Battery.h"
+#include "QuadTreeNode.h"
 #include "QuadTree.generated.h"
-inline TSharedPtr<class QuadTreeManager> root;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS()
 class L_UNREALEXAMPLE_API AQuadTree : public AActor
 {
 	GENERATED_BODY()
 
 public:
+	// Sets default values for this actor's properties
 	AQuadTree();
 
 protected:
-	// Called when the game starts
+	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
 	void SpawnActors();
 	void ActorsAddVelocity();
-
+	
 public:
 	UPROPERTY(EditAnywhere)
 	int32 cubeCount=20;
 	
 	UPROPERTY(EditAnywhere)
 	int32 width=500;
-	
+
 	UPROPERTY(EditAnywhere)
 	int32 height=500;
 
@@ -51,9 +52,7 @@ public:
 	UPROPERTY()
 	TArray<ABattery*> objs;
 
-	TSharedPtr<QuadTreeManager> root;
-	
-	FTimerHandle Timer_SpawnActors;
-	FTimerHandle Timer_AddActorsVelocity;
+	TSharedPtr<QuadTreeNode> root;
+	FTimerHandle timer;
+	FTimerHandle timer2;
 };
-
