@@ -45,9 +45,10 @@ void AQuadTree::SpawnActors()
 		return;
 	}
 	cubeCount--;
-	FVector pos = FVector(UKismetMathLibrary::RandomIntegerInRange(-height+10, height-10),
-		UKismetMathLibrary::RandomIntegerInRange(-width+10, width-10), 11);
-	FTransform trans = FTransform(FRotator(0, UKismetMathLibrary::RandomFloatInRange(0, 360), 0), pos, FVector(0.2));
+	FTransform trans = FTransform(
+		FRotator(0, UKismetMathLibrary::RandomFloatInRange(0, 360), 0),
+		FVector(UKismetMathLibrary::RandomIntegerInRange(-height+10, height-10),UKismetMathLibrary::RandomIntegerInRange(-width+10, width-10), 11),
+		FVector(0.2));
 	ABattery* actor= GetWorld()->SpawnActor<ABattery>(BatteryClass, trans);
 	if (IsValid(actor))
 	{

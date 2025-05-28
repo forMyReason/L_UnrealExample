@@ -26,6 +26,7 @@ void ABattery::BeginPlay()
 void ABattery::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	UE_LOG(LogTemp, Warning, TEXT("Battery Tick"));
 	if (bActive && targetActor)
 	{
 		float drawTime = 1 / UKismetSystemLibrary::GetFrameCount();

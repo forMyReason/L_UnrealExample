@@ -65,7 +65,9 @@ void QuadTreeNode::InsertObj(ABattery* obj)
 	//超过上限个数，创建子节点;或者不再是叶子节点
 	isLeaf = false;
 	for (auto& item : objs) {
-		for (int i = 0; i < 4; i++) {//四个象限
+		for (int i = 0; i < 4; i++)
+		{
+			//四个象限
 			FVector p = center + FVector(extend.X * dx[i], extend.Y * dy[i], 0);
 			FVector pMin = p.ComponentMin(center);
 			FVector pMax = p.ComponentMax(center);
@@ -78,7 +80,7 @@ void QuadTreeNode::InsertObj(ABattery* obj)
 				child_node[i]->InsertObj(item);
 				//break; //确保只在一个象限内
 			}
-		}			
+		}
 	}
 	objs.Empty(); //确保非叶子节点不存
 }
