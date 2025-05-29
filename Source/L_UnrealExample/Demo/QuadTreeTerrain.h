@@ -101,4 +101,10 @@ public:
     
     UPROPERTY(EditAnywhere, Category = "QuadTree")
     TSubclassOf<class UUserWidget> WidgetClass; // 要生成的Widget类
+
+    UPROPERTY(EditAnywhere, Category = "QuadTree")
+    FVector2D WidgetSize = FVector2D(16.f, 16.f);
+
+    UPROPERTY(EditAnywhere, Category= "QuadTree")
+    float WidgetHeight = 100.0f;
 };

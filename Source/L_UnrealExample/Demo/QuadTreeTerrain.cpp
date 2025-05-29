@@ -1,8 +1,10 @@
 ﻿#include "QuadTreeTerrain.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/PlayerCameraManager.h"
+#include "Components/TextBlock.h"
 #include "Components/WidgetComponent.h"
 #include "Engine/World.h"
+#include "QuadTree/QuadTreeNode.h"
 
 AQuadTreeTerrain::AQuadTreeTerrain()
 {
@@ -12,7 +14,7 @@ AQuadTreeTerrain::AQuadTreeTerrain()
 
 void AQuadTreeTerrain::BeginPlay()
 {
-    Super::BeginPlay();
+    Super::BeginPlay();     // 调用该父类的BeginPlay函数
     BuildQuadTree();
 }
 
@@ -170,11 +172,11 @@ void AQuadTreeTerrain::CreateOrUpdateWidget(TSharedPtr<QuadTreeNode> Node)
         Node->WidgetComponent = NewObject<UWidgetComponent>(this);
         Node->WidgetComponent->RegisterComponent();
         Node->WidgetComponent->SetWidgetClass(WidgetClass);
-        Node->WidgetComponent->SetDrawSize(FVector2D(32.f, 32.f));
+        Node->WidgetComponent->SetDrawSize(WidgetSize);
         Node->WidgetComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
         
-        // 设置Widget位置为节点中心（Z轴高度为100，可根据需要调整）
-        const FVector WidgetLocation(Node->Center.X, Node->Center.Y, 100.f);
+        // 设置Widget位置为节点中心
+        const FVector WidgetLocation(Node->Center.X, Node->Center.Y, WidgetHeight);
         Node->WidgetComponent->SetWorldLocation(WidgetLocation);
         
         // 设置Widget始终面向摄像机
@@ -184,6 +186,15 @@ void AQuadTreeTerrain::CreateOrUpdateWidget(TSharedPtr<QuadTreeNode> Node)
     // 更新Widget缩放比例（基于深度）
     const float Scale = 1.0f / FMath::Pow(2.0f, Node->Depth);
     Node->WidgetComponent->SetWorldScale3D(FVector(Scale));
+    
+    // 如果Widget已存在，直接更新内容
+    if (UUserWidget* UserWidget = Cast<UUserWidget>(Node->WidgetComponent->GetUserWidgetObject()))
+    {
+        if (UTextBlock* TextBlock = Cast<UTextBlock>(UserWidget->GetWidgetFromName(TEXT("TextBlock_120"))))
+        {
+            TextBlock->SetText(FText::FromString(FString::FromInt(Node->Depth)));
+        }
+    }
 }
 
 void AQuadTreeTerrain::RemoveNodeAndWidget(TSharedPtr<QuadTreeNode> Node)
@@ -244,6 +255,7 @@ FVector AQuadTreeTerrain::GetCameraLocation() const
 float AQuadTreeTerrain::GetDistanceToCamera(const FVector2D& NodeCenter) const
 {
     const FVector CameraLocation = GetCameraLocation();
+    // 四叉树主要用于分割平面，z坐标没有意义
     const FVector NodeCenter3D(NodeCenter.X, NodeCenter.Y, 0.f);
     return FVector::Dist(CameraLocation, NodeCenter3D);
 }
