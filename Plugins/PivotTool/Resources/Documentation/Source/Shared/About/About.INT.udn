@@ -1,0 +1,139 @@
+Availability:NoPublish
+Title:
+Crumbs:
+Description:
+
+[EXCERPT:ChangeLog]
+
+##1.3.6
+---
+- UE 5.1 support
+- Add BakeMeshPivotRelatie blueprint function
+---
+
+##1.3.5
+---
+- Add Match Actor to back a mesh's pivot to match another selected actor's pivot
+---
+
+##1.3.4
+---
+- Now can view changelog inside tool
+- Hide Align Actors toolbar by default
+- Experimental UE 5.0 support (bundled with 4.27 release)
+---
+
+##1.3.3
+---
+- Add BakeMeshPivot to blueprint library
+- Fix material shifted on some baked mesh
+---
+
+##1.3.2
+---
+- Add Freeze Scale option when baking mesh
+- Add option to keep referenced staticmesh actors in place after mesh baked
+---
+
+##1.3.1
+---
+- Pivot preview sphere size now base on actor bound instead of fix size
+- Add more preview shape options (off, point or coordinate only)
+---
+
+##1.3.0
+---
+- UI will auto wrap inside Pivot Tool window
+- Ctrl + mouse wheel to change scale of preset widgets
+- Add single preset widget mode (Use mouse wheel to change preset widget type)
+- Add option to copy/paste pivot in world space
+---
+
+##1.2.1
+---
+- Add 4.23 support
+---
+
+##1.2.0
+---
+- Add Align Actors
+- Add 4.22 support
+---
+
+##1.1.0.1
+---
+- Fixed Text UI mode option default is on
+---
+
+##1.1.0
+---
+- Add Text UI option to display Pivot Presets as text buttons
+- Add Last Selected Mode to apply pivot preset to last selected actor and set other selected actors' pivot the same as last selected actor
+- Now "Snap to Vertex" will use current widget location instead of actor's pivot point
+- Add scrollbar to options UI
+---
+
+##1.0.9
+---
+- Minor code clean up for non-unity build
+- Add 4.20 support
+---
+
+##1.0.8
+---
+- Now broadcast asset reimported event after pivot baked into static mesh
+- Fix Pivt Tool toolbar icon was missing in small icon mode
+---
+
+##1.0.7
+---
+- Add Offset to apply offset to current selected actors' pivot
+- Add Snap to Vertex to snap current selected actors' pivot to closest vertex position
+- Support non-unity build;
+- Drop 4.14 support
+---
+
+##1.0.6
+---
+- Add Pivot Preset Preview option, could be enalbe/disable in Edit - Editor Preferences - Content Editors - Pivot Tool section
+---
+
+##1.0.5
+---
+- 4.16 support
+- Update for IWYU header changes
+- Add Children mode, to set pivot base on actor and it's attached children
+- Now can bake pivot of multiple static mesh actor at the same time
+---
+
+##1.0.4
+---
+- Support bake mesh pivot with non-default build scale
+---
+
+##1.0.3
+---
+- Add axis display to Pivot Preset widget
+- Remember UI setting
+- Fixed a bug that clicking pivot preset when no actor selected and autosave is off will crash the editor
+- Minor code cleanup
+---
+
+##1.0.2
+---
+- Fixed a bug with Freeze Rotation
+---
+
+##1.0.1
+---
+- Freeze Rotation
+- Fixed Dup & Bake position
+---
+
+##1.0
+---
+- First release
+---
+
+[/EXCERPT:ChangeLog]
+
