@@ -21,13 +21,13 @@ public:
 	FString SDOneParamWithRetValue_UFunction(int32 a);
 
 	// 静态成员函数
-	static void StaticMemberFunc(FString str, int32 value) { }
+	static void MemberStaticFunc(FString str, int32 value) { }
 };
 
 //全局静态函数(静态非成员函数)
-static void StaticFunc(FString str, int32 value) { }
+static void GlobalStaticFunc(FString str, int32 value) { }
 
-class delegation
+class SingleCastDelegate
 {
 public:
 	void Test()
@@ -61,8 +61,8 @@ public:
 		 * 需要保证绑定的函数和委托的参数一致
 		 */
 		FSingleDelegateWithTwoParam SDTwoParam;
-		SDTwoParam.BindStatic(&CallBackTarget::StaticMemberFunc);		// 绑定静态成员函数
-		SDTwoParam.BindStatic(&StaticFunc);								// 绑定全局函数
+		SDTwoParam.BindStatic(&CallBackTarget::MemberStaticFunc);		// 绑定静态成员函数
+		SDTwoParam.BindStatic(&GlobalStaticFunc);								// 绑定全局函数
 
 		/* NOTE: 绑定lambda表达式
 		 */
@@ -76,13 +76,23 @@ public:
 
 		/* NOTE: 委托触发
 		 * 单播委托对象使用ExecuteIfBound()触发回调
-		 * 可以使用IsBound()判断是否已经绑定
+		 * 可以使用 IsBound() 判断是否已经绑定
 		 */
-		SDNoParam.ExecuteIfBound();
-		SDOneParam.ExecuteIfBound("test single delegate");
-		SDTwoParam.ExecuteIfBound("test single delegate", 100);
-		FString rtvstr = SDOneParamWithRetValue.ExecuteIfBound(123);
-
+		if (SDNoParam.IsBound())
+		{
+			SDNoParam.ExecuteIfBound();
+			SDOneParam.ExecuteIfBound("test single delegate");
+			SDTwoParam.ExecuteIfBound("test single delegate", 100);
+			FString rtvstr = SDOneParamWithRetValue.ExecuteIfBound(123);
+		}
 		delete Target;
+
+		/*
+		 * NOTE: 委托解绑
+		 */
+		SDNoParam.Unbind();
+		SDOneParam.Unbind();
+		SDTwoParam.Unbind();
+		SDOneParamWithRetValue.Unbind();
 	}
 };
