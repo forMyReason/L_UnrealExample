@@ -1,0 +1,3 @@
+[submodule "Plugins/L_UnrealPlugins"]
+	path = Plugins/L_UnrealPlugins
+	url = https://github.com/forMyReason/L_UnrealPlugins.git
