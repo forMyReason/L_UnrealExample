@@ -2,6 +2,10 @@
 
 ue 学习过程中实现的各种小玩意...
 
+## 插件管理
+- L_UnrealPlugins: 采用submodule的形式，存放个人学习工作过程中涉及过的插件，旨在积少成多，为日后方便。同时记录自己来时路。
+- Temp: 暂存未开发完全的插件
+
 ## 四叉树聚类
 - Reference
   - [UE4 C++ 四叉树实现及可视化](https://www.cnblogs.com/shiroe/p/15526194.html)
