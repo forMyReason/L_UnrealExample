@@ -76,3 +76,8 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+Characters/
+LevelPrototyping/
+ThirdPerson/
+**/__pycache__/
